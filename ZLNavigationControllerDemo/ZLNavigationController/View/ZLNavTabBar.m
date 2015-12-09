@@ -25,6 +25,7 @@
     NSArray         *_itemsWidth;           // 控制器标题的宽度数组
     BOOL            _showArrowButton;       // 是否显示+按钮
     NSMutableArray  *_itemsShowedTitle;
+    CGFloat         _leftImageWidth;
 }
 
 @end
@@ -63,6 +64,7 @@
     shadowIcon.image = shadow;
     shadowIcon.frame = CGRectMake(SCREEN_WIDTH - shadow.size.width, ZERO_COORDINATE, shadow.size.width, shadow.size.height);
     [self addSubview:shadowIcon];
+    _leftImageWidth = shadow.size.width;
     
     _arrowButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _arrowButton.frame = CGRectMake(widthWithoutArrow, ZERO_COORDINATE, ARROW_BUTTON_WIDTH, ARROW_BUTTON_WIDTH);
@@ -153,7 +155,7 @@
 //        button = [_items firstObject];
 //    }
     
-    CGFloat flag = SCREEN_WIDTH - ARROW_BUTTON_WIDTH;
+    CGFloat flag = (currentIndex < [_selectedItemTitles count] - 2) ? (SCREEN_WIDTH - _leftImageWidth) : (SCREEN_WIDTH - ARROW_BUTTON_WIDTH);
     
     if (button.frame.origin.x + button.frame.size.width > flag)
     {

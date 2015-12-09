@@ -11,15 +11,15 @@
     twoViewController.view.backgroundColor = [UIColor purpleColor];
     
     ZLTableViewController *threeViewController = [[ZLTableViewController alloc] init];
-    threeViewController.title = @"娱乐八卦";
+    threeViewController.title = @"图片";
     threeViewController.view.backgroundColor = [UIColor orangeColor];
     
     UIViewController *fourViewController = [[UIViewController alloc] init];
-    fourViewController.title = @"天府之国";
+    fourViewController.title = @"文化";
     fourViewController.view.backgroundColor = [UIColor magentaColor];
     
     UIViewController *fiveViewController = [[UIViewController alloc] init];
-    fiveViewController.title = @"四川省";
+    fiveViewController.title = @"二手车";
     fiveViewController.view.backgroundColor = [UIColor yellowColor];
     
     UIViewController *sixViewController = [[UIViewController alloc] init];
@@ -27,15 +27,15 @@
     sixViewController.view.backgroundColor = [UIColor cyanColor];
     
     UIViewController *sevenViewController = [[UIViewController alloc] init];
-    sevenViewController.title = @"国际新闻";
+    sevenViewController.title = @"读书";
     sevenViewController.view.backgroundColor = [UIColor blueColor];
     
     UIViewController *eightViewController = [[UIViewController alloc] init];
-    eightViewController.title = @"自媒体";
+    eightViewController.title = @"游戏";
     eightViewController.view.backgroundColor = [UIColor greenColor];
     
     UIViewController *ninghtViewController = [[UIViewController alloc] init];
-    ninghtViewController.title = @"科技";
+    ninghtViewController.title = @"动漫动画";
     ninghtViewController.view.backgroundColor = [UIColor redColor];
     
     ZLNavTabBarController *navTabBarController = [[ZLNavTabBarController alloc] init];
