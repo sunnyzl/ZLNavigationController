@@ -16,16 +16,16 @@
 @interface ZLNavTabBar (){
     UIButton        *_arrowButton;
     
-    UIScrollView    *_navigationTabBar;      // all items on this scroll view
+    UIScrollView    *_navigationTabBar;      // 所有控制器标题都在此scollView上
     
-    UIView          *_line;                 // underscore show which item selected
-    ZLPopView       *_popView;              // when item menu, will show this view
+    UIView          *_line;                 // 选中控制器标题的下划线
+    ZLPopView       *_popView;              // 弹出popView
     
-    NSMutableArray  *_items;                // ZLNavTabBar pressed item
-    NSArray         *_itemsWidth;           // an array of items' width
-    BOOL            _showArrowButton;       // is showed arrow button
-    BOOL            _popItemMenu;           // is needed pop item menu
+    NSMutableArray  *_items;                // ZLNavTabBar 上的条目
+    NSArray         *_itemsWidth;           // 控制器标题的宽度数组
+    BOOL            _showArrowButton;       // 是否显示+按钮
     NSMutableArray  *_itemsShowedTitle;
+    CGFloat         _leftImageWidth;
 }
 
 @end
@@ -64,6 +64,7 @@
     shadowIcon.image = shadow;
     shadowIcon.frame = CGRectMake(SCREEN_WIDTH - shadow.size.width, ZERO_COORDINATE, shadow.size.width, shadow.size.height);
     [self addSubview:shadowIcon];
+    _leftImageWidth = shadow.size.width;
     
     _arrowButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _arrowButton.frame = CGRectMake(widthWithoutArrow, ZERO_COORDINATE, ARROW_BUTTON_WIDTH, ARROW_BUTTON_WIDTH);
@@ -154,7 +155,7 @@
 //        button = [_items firstObject];
 //    }
     
-    CGFloat flag = SCREEN_WIDTH - ARROW_BUTTON_WIDTH;
+    CGFloat flag = (currentIndex < [_selectedItemTitles count] - 2) ? (SCREEN_WIDTH - _leftImageWidth) : (SCREEN_WIDTH - ARROW_BUTTON_WIDTH);
     
     if (button.frame.origin.x + button.frame.size.width > flag)
     {

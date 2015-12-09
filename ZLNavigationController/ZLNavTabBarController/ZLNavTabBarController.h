@@ -12,12 +12,12 @@
 
 @interface ZLNavTabBarController : UIViewController
 
-@property (nonatomic, assign)   BOOL        scrollAnimation;            // Default value: NO
-@property (nonatomic, assign)   BOOL        mainViewBounces;            // Default value: NO
+@property (nonatomic, assign)   BOOL        scrollAnimation;            // 默认值: NO
+@property (nonatomic, assign)   BOOL        mainViewBounces;            // 默认值: NO
 
-@property (nonatomic, strong)   NSArray     *subViewControllers;        // An array of children view controllers
+@property (nonatomic, strong)   NSArray     *subViewControllers;        // 子控制器
 
-@property (nonatomic, strong)   UIColor     *navTabBarColor;            // Could not set [UIColor clear], if you set, NavTabbar will show initialize color
+@property (nonatomic, strong)   UIColor     *navTabBarColor;            // 不能设置为[UIColor clearColor]
 @property (nonatomic, strong)   UIColor     *navTabBarLineColor;
 
 @property (nonatomic, assign) NSInteger unchangedToIndex;
@@ -26,38 +26,37 @@
 
 
 /**
- *  Initialize ZLNavTabBarViewController Instance And Show Children View Controllers
+ *  初始化（展示子控制器）
  *
- *  @param subViewControllers - set an array of children view controllers
+ *  @param subViewControllers 子控制器数组
  *
- *  @return Instance
+ *  @return 实例
  */
 - (instancetype)initWithSubViewControllers:(NSArray *)subViewControllers;
 
 /**
- *  Initialize ZLNavTabBarViewController Instance And Show On The Parent View Controller
+ *  初始化（并指明父控制器）
  *
- *  @param viewController - set parent view controller
+ *  @param viewController 父控制器
  *
  *  @return Instance
  */
 - (instancetype)initWithParentViewController:(UIViewController *)viewController;
 
 /**
- *  Initialize ZLNavTabBarViewController Instance, Show On The Parent View Controller And Show On The Parent View Controller
+ *  初始化（指明父控制器，并给子控制器赋值）
  *
- *  @param subControllers - set an array of children view controllers
- *  @param viewController - set parent view controller
- *  @param show           - is show the arrow button
+ *  @param subControllers 子控制器数组
+ *  @param viewController 父控制器
  *
- *  @return Instance
+ *  @return 实例
  */
 - (instancetype)initWithSubViewControllers:(NSArray *)subControllers andParentViewController:(UIViewController *)viewController;
 
 /**
- *  Show On The Parent View Controller
+ *  添加父控制器
  *
- *  @param viewController - set parent view controller
+ *  @param viewController 父控制器
  */
 - (void)addParentController:(UIViewController *)viewController;
 

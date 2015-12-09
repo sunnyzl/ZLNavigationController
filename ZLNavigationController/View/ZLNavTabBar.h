@@ -14,8 +14,6 @@
 
 - (void)itemDidSelectedWithIndex:(NSInteger)index;
 
-//- (void)popViewAboveNavTabBarDidClickBackButton;
-
 @end
 
 @interface ZLNavTabBar : UIView
