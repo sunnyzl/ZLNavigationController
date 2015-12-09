@@ -44,4 +44,6 @@
     navTabBarController.selectedToIndex = 5;
     [navTabBarController addParentController:self];
     可根据需要创建相应的控制器
+##效果图
+ ![](https://raw.githubusercontent.com/sunnyzl/ZLNavigationController/master/demo.gif)
     
