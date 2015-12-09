@@ -1,25 +1,7 @@
-//
-//  ViewController.m
-//  ZLNavigationControllerDemo
-//
-//  Created by zhaoliang on 15/12/9.
-//  Copyright © 2015年 zhao. All rights reserved.
-//
+# ZLNavigationController
+仿头条导航栏，可存储状态
 
-#import "ViewController.h"
-#import "ZLNavTabBarController.h"
-#import "ZLTableViewController.h"
-#import "ZLTestViewController.h"
-
-@interface ViewController ()
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+##使用方法
     UIViewController *oneViewController = [[UIViewController alloc] init];
     oneViewController.title = @"新闻";
     oneViewController.view.backgroundColor = [UIColor brownColor];
@@ -61,11 +43,5 @@
     navTabBarController.mainViewBounces = YES;
     navTabBarController.selectedToIndex = 5;
     [navTabBarController addParentController:self];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-@end
+    可根据需要创建相应的控制器
+    

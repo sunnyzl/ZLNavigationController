@@ -13,6 +13,19 @@
 		3054652A1C183B7F00562292 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 305465281C183B7F00562292 /* Main.storyboard */; };
 		3054652C1C183B7F00562292 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3054652B1C183B7F00562292 /* Assets.xcassets */; };
 		3054652F1C183B7F00562292 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3054652D1C183B7F00562292 /* LaunchScreen.storyboard */; };
+		305465531C183C1800562292 /* NSArray+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 305465391C183C1800562292 /* NSArray+Log.m */; };
+		305465541C183C1800562292 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3054653B1C183C1800562292 /* UIImage+ImageEffects.m */; };
+		305465551C183C1800562292 /* btn_navigation_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3054653D1C183C1800562292 /* btn_navigation_back@2x.png */; };
+		305465561C183C1800562292 /* btn_navigation_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3054653E1C183C1800562292 /* btn_navigation_close@2x.png */; };
+		305465571C183C1800562292 /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3054653F1C183C1800562292 /* shadow.png */; };
+		305465581C183C1800562292 /* ZLChannelViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 305465421C183C1800562292 /* ZLChannelViewModel.m */; };
+		305465591C183C1800562292 /* ZLChannelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 305465451C183C1800562292 /* ZLChannelView.m */; };
+		3054655A1C183C1800562292 /* ZLNavTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 305465471C183C1800562292 /* ZLNavTabBar.m */; };
+		3054655B1C183C1800562292 /* ZLPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 305465491C183C1800562292 /* ZLPopView.m */; };
+		3054655C1C183C1800562292 /* ZLNavTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3054654D1C183C1800562292 /* ZLNavTabBarController.m */; };
+		3054655D1C183C1800562292 /* ZLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3054654F1C183C1800562292 /* ZLTableViewController.m */; };
+		3054655E1C183C1800562292 /* ZLTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 305465511C183C1800562292 /* ZLTestViewController.m */; };
+		3054655F1C183C1800562292 /* ZLTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 305465521C183C1800562292 /* ZLTestViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +39,29 @@
 		3054652B1C183B7F00562292 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3054652E1C183B7F00562292 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		305465301C183B7F00562292 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		305465381C183C1800562292 /* NSArray+Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Log.h"; sourceTree = "<group>"; };
+		305465391C183C1800562292 /* NSArray+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Log.m"; sourceTree = "<group>"; };
+		3054653A1C183C1800562292 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		3054653B1C183C1800562292 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		3054653D1C183C1800562292 /* btn_navigation_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_navigation_back@2x.png"; sourceTree = "<group>"; };
+		3054653E1C183C1800562292 /* btn_navigation_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_navigation_close@2x.png"; sourceTree = "<group>"; };
+		3054653F1C183C1800562292 /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
+		305465411C183C1800562292 /* ZLChannelViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLChannelViewModel.h; sourceTree = "<group>"; };
+		305465421C183C1800562292 /* ZLChannelViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLChannelViewModel.m; sourceTree = "<group>"; };
+		305465441C183C1800562292 /* ZLChannelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLChannelView.h; sourceTree = "<group>"; };
+		305465451C183C1800562292 /* ZLChannelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLChannelView.m; sourceTree = "<group>"; };
+		305465461C183C1800562292 /* ZLNavTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLNavTabBar.h; sourceTree = "<group>"; };
+		305465471C183C1800562292 /* ZLNavTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLNavTabBar.m; sourceTree = "<group>"; };
+		305465481C183C1800562292 /* ZLPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPopView.h; sourceTree = "<group>"; };
+		305465491C183C1800562292 /* ZLPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPopView.m; sourceTree = "<group>"; };
+		3054654A1C183C1800562292 /* ZLCommonConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLCommonConst.h; sourceTree = "<group>"; };
+		3054654C1C183C1800562292 /* ZLNavTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLNavTabBarController.h; sourceTree = "<group>"; };
+		3054654D1C183C1800562292 /* ZLNavTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLNavTabBarController.m; sourceTree = "<group>"; };
+		3054654E1C183C1800562292 /* ZLTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLTableViewController.h; sourceTree = "<group>"; };
+		3054654F1C183C1800562292 /* ZLTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLTableViewController.m; sourceTree = "<group>"; };
+		305465501C183C1800562292 /* ZLTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLTestViewController.h; sourceTree = "<group>"; };
+		305465511C183C1800562292 /* ZLTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLTestViewController.m; sourceTree = "<group>"; };
+		305465521C183C1800562292 /* ZLTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZLTestViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +94,12 @@
 		3054651E1C183B7F00562292 /* ZLNavigationControllerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				305465361C183C1800562292 /* ZLNavigationController */,
+				3054654E1C183C1800562292 /* ZLTableViewController.h */,
+				3054654F1C183C1800562292 /* ZLTableViewController.m */,
+				305465501C183C1800562292 /* ZLTestViewController.h */,
+				305465511C183C1800562292 /* ZLTestViewController.m */,
+				305465521C183C1800562292 /* ZLTestViewController.xib */,
 				305465221C183B7F00562292 /* AppDelegate.h */,
 				305465231C183B7F00562292 /* AppDelegate.m */,
 				305465251C183B7F00562292 /* ViewController.h */,
@@ -77,6 +119,71 @@
 				305465201C183B7F00562292 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		305465361C183C1800562292 /* ZLNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				305465371C183C1800562292 /* Category */,
+				3054653C1C183C1800562292 /* Icon */,
+				305465401C183C1800562292 /* Model */,
+				305465431C183C1800562292 /* View */,
+				3054654A1C183C1800562292 /* ZLCommonConst.h */,
+				3054654B1C183C1800562292 /* ZLNavTabBarController */,
+			);
+			path = ZLNavigationController;
+			sourceTree = "<group>";
+		};
+		305465371C183C1800562292 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				305465381C183C1800562292 /* NSArray+Log.h */,
+				305465391C183C1800562292 /* NSArray+Log.m */,
+				3054653A1C183C1800562292 /* UIImage+ImageEffects.h */,
+				3054653B1C183C1800562292 /* UIImage+ImageEffects.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		3054653C1C183C1800562292 /* Icon */ = {
+			isa = PBXGroup;
+			children = (
+				3054653D1C183C1800562292 /* btn_navigation_back@2x.png */,
+				3054653E1C183C1800562292 /* btn_navigation_close@2x.png */,
+				3054653F1C183C1800562292 /* shadow.png */,
+			);
+			path = Icon;
+			sourceTree = "<group>";
+		};
+		305465401C183C1800562292 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				305465411C183C1800562292 /* ZLChannelViewModel.h */,
+				305465421C183C1800562292 /* ZLChannelViewModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		305465431C183C1800562292 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				305465441C183C1800562292 /* ZLChannelView.h */,
+				305465451C183C1800562292 /* ZLChannelView.m */,
+				305465461C183C1800562292 /* ZLNavTabBar.h */,
+				305465471C183C1800562292 /* ZLNavTabBar.m */,
+				305465481C183C1800562292 /* ZLPopView.h */,
+				305465491C183C1800562292 /* ZLPopView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3054654B1C183C1800562292 /* ZLNavTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				3054654C1C183C1800562292 /* ZLNavTabBarController.h */,
+				3054654D1C183C1800562292 /* ZLNavTabBarController.m */,
+			);
+			path = ZLNavTabBarController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +245,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3054652F1C183B7F00562292 /* LaunchScreen.storyboard in Resources */,
+				305465561C183C1800562292 /* btn_navigation_close@2x.png in Resources */,
 				3054652C1C183B7F00562292 /* Assets.xcassets in Resources */,
+				3054655F1C183C1800562292 /* ZLTestViewController.xib in Resources */,
+				305465551C183C1800562292 /* btn_navigation_back@2x.png in Resources */,
 				3054652A1C183B7F00562292 /* Main.storyboard in Resources */,
+				305465571C183C1800562292 /* shadow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,9 +261,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3054655B1C183C1800562292 /* ZLPopView.m in Sources */,
+				3054655C1C183C1800562292 /* ZLNavTabBarController.m in Sources */,
+				305465591C183C1800562292 /* ZLChannelView.m in Sources */,
 				305465271C183B7F00562292 /* ViewController.m in Sources */,
+				3054655D1C183C1800562292 /* ZLTableViewController.m in Sources */,
+				305465541C183C1800562292 /* UIImage+ImageEffects.m in Sources */,
+				3054655E1C183C1800562292 /* ZLTestViewController.m in Sources */,
+				305465531C183C1800562292 /* NSArray+Log.m in Sources */,
 				305465241C183B7F00562292 /* AppDelegate.m in Sources */,
+				305465581C183C1800562292 /* ZLChannelViewModel.m in Sources */,
 				305465211C183B7F00562292 /* main.m in Sources */,
+				3054655A1C183C1800562292 /* ZLNavTabBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
