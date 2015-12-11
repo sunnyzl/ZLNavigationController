@@ -20,7 +20,6 @@
 
 @property (nonatomic, assign, readonly) CGFloat viewHeight;
 @property (nonatomic, assign) NSInteger selectedToIndex;
-@property (nonatomic, assign) NSInteger unchangedToIndex;
 @property (nonatomic, weak) id <ZLChannelViewDelegate>delegate;
 @property (nonatomic, strong) NSArray *titleNames;
 

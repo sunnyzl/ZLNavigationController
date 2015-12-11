@@ -26,6 +26,7 @@
 		3054655D1C183C1800562292 /* ZLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3054654F1C183C1800562292 /* ZLTableViewController.m */; };
 		3054655E1C183C1800562292 /* ZLTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 305465511C183C1800562292 /* ZLTestViewController.m */; };
 		3054655F1C183C1800562292 /* ZLTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 305465521C183C1800562292 /* ZLTestViewController.xib */; };
+		3081145D1C1B4576005B028C /* UIView+ZLFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3081145C1C1B4576005B028C /* UIView+ZLFrame.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,8 @@
 		305465501C183C1800562292 /* ZLTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLTestViewController.h; sourceTree = "<group>"; };
 		305465511C183C1800562292 /* ZLTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLTestViewController.m; sourceTree = "<group>"; };
 		305465521C183C1800562292 /* ZLTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZLTestViewController.xib; sourceTree = "<group>"; };
+		3081145B1C1B4576005B028C /* UIView+ZLFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ZLFrame.h"; sourceTree = "<group>"; };
+		3081145C1C1B4576005B028C /* UIView+ZLFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ZLFrame.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,8 @@
 		305465371C183C1800562292 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				3081145B1C1B4576005B028C /* UIView+ZLFrame.h */,
+				3081145C1C1B4576005B028C /* UIView+ZLFrame.m */,
 				305465381C183C1800562292 /* NSArray+Log.h */,
 				305465391C183C1800562292 /* NSArray+Log.m */,
 				3054653A1C183C1800562292 /* UIImage+ImageEffects.h */,
@@ -217,7 +222,6 @@
 				TargetAttributes = {
 					3054651B1C183B7F00562292 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = U56FLY5VKR;
 					};
 				};
 			};
@@ -272,6 +276,7 @@
 				305465241C183B7F00562292 /* AppDelegate.m in Sources */,
 				305465581C183C1800562292 /* ZLChannelViewModel.m in Sources */,
 				305465211C183B7F00562292 /* main.m in Sources */,
+				3081145D1C1B4576005B028C /* UIView+ZLFrame.m in Sources */,
 				3054655A1C183C1800562292 /* ZLNavTabBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,7 +387,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ZLNavigationControllerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhao.ZLNavigationControllerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -393,7 +401,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ZLNavigationControllerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhao.ZLNavigationControllerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -419,6 +430,7 @@
 				305465351C183B7F00562292 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

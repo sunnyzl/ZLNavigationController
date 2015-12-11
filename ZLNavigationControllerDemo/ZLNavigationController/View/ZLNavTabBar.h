@@ -20,10 +20,11 @@
 
 @property (nonatomic, weak) id  <ZLNavTabBarDelegate>delegate;
 @property (nonatomic, assign) NSInteger currentIndex;
-@property (nonatomic, assign) NSInteger unchangedToIndex;
 @property (nonatomic, strong) NSArray *totalItemTitles;
 @property (nonatomic, strong) NSArray *selectedItemTitles;
 @property (nonatomic, assign) NSInteger selectedToIndex;
 @property (nonatomic, strong) UIColor *lineColor;
+
+- (instancetype)initWithFrame:(CGRect)frame showArrayButton:(BOOL)yesOrNo;
 
 @end

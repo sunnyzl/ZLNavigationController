@@ -35,6 +35,7 @@ static void *RecordLastClickKey = @"RecordLastClickKey";
 {
     if (self = [super init]) {
         _selectedToIndex = 5;
+        _showArrayButton = YES;
     }
     return self;
 }
@@ -123,7 +124,7 @@ static void *RecordLastClickKey = @"RecordLastClickKey";
     statusView.backgroundColor = NavTabbarColor;
     [self.view addSubview:statusView];
     
-    _navTabBar = [[ZLNavTabBar alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, STATUS_BAR_HEIGHT, SCREEN_WIDTH, NAV_TAB_BAR_HEIGHT)];
+    _navTabBar = [[ZLNavTabBar alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, STATUS_BAR_HEIGHT, SCREEN_WIDTH, NAV_TAB_BAR_HEIGHT) showArrayButton:self.showArrayButton];
     
     _navTabBar.selectedToIndex = _selectedToIndex;
     
@@ -196,7 +197,19 @@ static void *RecordLastClickKey = @"RecordLastClickKey";
     _mainView.contentSize = CGSizeMake(SCREEN_WIDTH * titles.count, ZERO_COORDINATE);
 }
 
-
+- (void)setUnchangedToIndex:(NSInteger)unchangedToIndex
+{
+    _unchangedToIndex = unchangedToIndex;
+    int lastValue = [[NSUD objectForKey:UNCHANGED_TO_INDEX] intValue];
+    [NSUD setObject:@(_unchangedToIndex) forKey:UNCHANGED_TO_INDEX];
+    [NSUD synchronize];
+    int newValue = [[NSUD objectForKey:UNCHANGED_TO_INDEX] intValue];
+    if (lastValue == newValue) {
+        [NSUD setObject:@(NO) forKey:IS_UNCHANGED_TO_INDEX_CHANGED];
+    } else {
+        [NSUD setObject:@(YES) forKey:IS_UNCHANGED_TO_INDEX_CHANGED];
+    }
+}
 
 - (void)cleanData
 {
