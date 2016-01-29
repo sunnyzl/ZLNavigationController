@@ -7,8 +7,11 @@
 //
 
 #import "ZLTestViewController.h"
+#import "ZLCommonConst.h"
 
 @interface ZLTestViewController ()
+
+@property (nonatomic, weak) UIView *nightView;
 
 @end
 
@@ -24,8 +27,8 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)btnClick:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 /*
 #pragma mark - Navigation

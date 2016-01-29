@@ -75,6 +75,8 @@ typedef void(^Completion)(void);
         [self.totalArray addObject:button];
         
     }
+    [NSUD setObject:@(NO) forKey:IS_UNCHANGED_TO_INDEX_CHANGED];
+    [NSUD synchronize];
 }
 
 - (void)updateSubViewsWithTotalArray:(NSArray *)totalArray
@@ -223,6 +225,7 @@ typedef void(^Completion)(void);
             [self sendNotificationOfSelectedChannelChanged:self.selectedArray];
             [NSUD setObject:self.selectedArray forKey:SELECTED_CHANNEL_NAMES];
             ZLChannelViewModel *channelViewModel = [[ZLChannelViewModel alloc] initWithTotalArray:self.selectedTotalArray];
+            
             [NSKeyedArchiver archiveRootObject:channelViewModel toFile:CHANNEL_FILE_PATH];
             
         }];

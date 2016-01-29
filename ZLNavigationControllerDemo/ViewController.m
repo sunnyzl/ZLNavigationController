@@ -10,6 +10,7 @@
 #import "ZLNavTabBarController.h"
 #import "ZLTableViewController.h"
 #import "ZLTestViewController.h"
+#import "ZLCommonConst.h"
 
 @interface ViewController ()
 
@@ -60,9 +61,11 @@
     navTabBarController.subViewControllers = @[oneViewController, twoViewController, threeViewController, fourViewController, fiveViewController, sixViewController, sevenViewController, eightViewController, ninghtViewController];
     navTabBarController.mainViewBounces = YES;
     navTabBarController.selectedToIndex = 5;
-    navTabBarController.unchangedToIndex = 1;
+    navTabBarController.unchangedToIndex = 2;
     navTabBarController.showArrayButton = YES;
     [navTabBarController addParentController:self];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

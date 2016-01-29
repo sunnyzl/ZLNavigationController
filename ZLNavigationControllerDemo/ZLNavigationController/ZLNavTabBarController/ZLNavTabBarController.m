@@ -71,6 +71,7 @@ static void *RecordLastClickKey = @"RecordLastClickKey";
     [self viewConfig];
     [self initConfig];
     [NS_NOTIFICATION_CENTER addObserver:self selector:@selector(selectedChannelChangedNotification:) name:SelectedChannelChangedNotification object:nil];
+    
 }
 
 - (void)selectedChannelChangedNotification:(NSNotification *)notification
@@ -118,7 +119,6 @@ static void *RecordLastClickKey = @"RecordLastClickKey";
 
 - (void)viewInit
 {
-    
     _navTabBarColor = _navTabBarColor ? _navTabBarColor : NavTabbarColor;
     UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, ZERO_COORDINATE, SCREEN_WIDTH, STATUS_BAR_HEIGHT)];
     statusView.backgroundColor = NavTabbarColor;
@@ -206,9 +206,12 @@ static void *RecordLastClickKey = @"RecordLastClickKey";
     int newValue = [[NSUD objectForKey:UNCHANGED_TO_INDEX] intValue];
     if (lastValue == newValue) {
         [NSUD setObject:@(NO) forKey:IS_UNCHANGED_TO_INDEX_CHANGED];
+        [NSUD synchronize];
     } else {
         [NSUD setObject:@(YES) forKey:IS_UNCHANGED_TO_INDEX_CHANGED];
+        [NSUD synchronize];
     }
+    
 }
 
 - (void)cleanData
