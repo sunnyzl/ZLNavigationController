@@ -76,6 +76,8 @@
 #define SELECTED_TO_INDEX               @"SELECTED_TO_INDEX"
 #define CURRENT_PRESS_INDEX             @"CURRENT_PRESS_INDEX"
 #define CURRENT_TITLE                   @"CURRENT_TITLE"
+#define UNCHANGED_TO_INDEX              @"UNCHANGED_TO_INDEX"
+#define IS_UNCHANGED_TO_INDEX_CHANGED   @"IS_UNCHANGED_TO_INDEX_CHANGED"
 
 
 #define SelectedChannelChangedNotification @"SelectedChannelChangedNotification"

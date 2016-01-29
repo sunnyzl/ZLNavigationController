@@ -9,13 +9,12 @@
 #import "ZLNavTabBar.h"
 #import "ZLCommonConst.h"
 #import "ZLPopView.h"
+#import "UIView+ZLFrame.h"
 
 #define TABBAR_TITLE_FONT [UIFont systemFontOfSize:18.f]
 #define TABBAR_TITLE_SIZE_FONT [UIFont systemFontOfSize:14.f]
 
 @interface ZLNavTabBar (){
-    UIButton        *_arrowButton;
-    
     UIScrollView    *_navigationTabBar;      // 所有控制器标题都在此scollView上
     
     UIView          *_line;                 // 选中控制器标题的下划线
@@ -23,19 +22,22 @@
     
     NSMutableArray  *_items;                // ZLNavTabBar 上的条目
     NSArray         *_itemsWidth;           // 控制器标题的宽度数组
-    BOOL            _showArrowButton;       // 是否显示+按钮
     NSMutableArray  *_itemsShowedTitle;
     CGFloat         _leftImageWidth;
+    BOOL            _showArrayButton;
+    CGFloat         _navigationTabBarWidth;
+    CGFloat         _selectedTitlesWidth;
 }
 
 @end
 
 @implementation ZLNavTabBar
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame showArrayButton:(BOOL)yesOrNo
 {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = NavTabbarColor;
+        _showArrayButton = yesOrNo;
         [self viewConfig];
     }
     return self;
@@ -46,32 +48,28 @@
     _items = [@[] mutableCopy];
     _itemsShowedTitle = [@[] mutableCopy];
     
+    _navigationTabBarWidth = _showArrayButton ? SCREEN_WIDTH - ARROW_BUTTON_WIDTH : SCREEN_WIDTH;
     
-    
-    
-    CGFloat widthWithoutArrow = SCREEN_WIDTH - ARROW_BUTTON_WIDTH;
-    
-    
-    
-    _navigationTabBar = [[UIScrollView alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, ZERO_COORDINATE, widthWithoutArrow, NAV_TAB_BAR_HEIGHT)];
+    _navigationTabBar = [[UIScrollView alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, ZERO_COORDINATE, _navigationTabBarWidth, NAV_TAB_BAR_HEIGHT)];
     _navigationTabBar.backgroundColor = [UIColor clearColor];
     _navigationTabBar.showsHorizontalScrollIndicator = NO;
     _navigationTabBar.showsVerticalScrollIndicator = NO;
     [self addSubview:_navigationTabBar];
-    
-    UIImage *shadow = [UIImage imageNamed:@"shadow"];
-    UIImageView *shadowIcon = [[UIImageView alloc] init];
-    shadowIcon.image = shadow;
-    shadowIcon.frame = CGRectMake(SCREEN_WIDTH - shadow.size.width, ZERO_COORDINATE, shadow.size.width, shadow.size.height);
-    [self addSubview:shadowIcon];
-    _leftImageWidth = shadow.size.width;
-    
-    _arrowButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _arrowButton.frame = CGRectMake(widthWithoutArrow, ZERO_COORDINATE, ARROW_BUTTON_WIDTH, ARROW_BUTTON_WIDTH);
-    _arrowButton.backgroundColor = [UIColor clearColor];
-    [_arrowButton setBackgroundImage:[UIImage imageNamed:@"btn_navigation_close"] forState:UIControlStateNormal];
-    [_arrowButton addTarget:self action:@selector(arrowBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_arrowButton];
+    if (_showArrayButton) {
+        UIImage *shadow = [UIImage imageNamed:@"shadow"];
+        UIImageView *shadowIcon = [[UIImageView alloc] init];
+        shadowIcon.image = shadow;
+        shadowIcon.frame = CGRectMake(SCREEN_WIDTH - shadow.size.width, ZERO_COORDINATE, shadow.size.width, shadow.size.height);
+        _leftImageWidth = shadow.size.width;
+        [self addSubview:shadowIcon];
+        
+        UIButton *arrowButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        arrowButton.frame = CGRectMake(_navigationTabBarWidth, ZERO_COORDINATE, ARROW_BUTTON_WIDTH, ARROW_BUTTON_WIDTH);
+        arrowButton.backgroundColor = [UIColor clearColor];
+        [arrowButton setBackgroundImage:[UIImage imageNamed:@"btn_navigation_close"] forState:UIControlStateNormal];
+        [arrowButton addTarget:self action:@selector(arrowBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:arrowButton];
+    }
     
     UIView *dividerView = [[UIView alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, NAVIGATION_BAR_HEIGHT - 1.f, SCREEN_WIDTH, 1.f)];
     dividerView.backgroundColor = UIColorWithRGBA(230, 230, 230, 1.f);
@@ -88,22 +86,32 @@
 - (NSArray *)getButtonsWidthWithTitles:(NSArray *)titles;
 {
     NSMutableArray *widths = [@[] mutableCopy];
-    
+    _selectedTitlesWidth = 0;
     for (NSString *title in titles)
     {
         CGSize size = [title boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : TABBAR_TITLE_FONT} context:nil].size;
-        NSNumber *width = [NSNumber numberWithFloat:size.width + 20.f];
+        CGFloat eachButtonWidth = size.width + 20.f;
+        _selectedTitlesWidth += eachButtonWidth;
+        NSNumber *width = [NSNumber numberWithFloat:eachButtonWidth];
         [widths addObject:width];
     }
-    
+    if (_selectedTitlesWidth < _navigationTabBarWidth) {
+        [widths removeAllObjects];
+        NSNumber *width = [NSNumber numberWithFloat:_navigationTabBarWidth / titles.count];
+        for (int index = 0; index < titles.count; index++) {
+            [widths addObject:width];
+        }
+    }
     return widths;
 }
+
+
 
 - (CGFloat)contentWidthAndAddNavTabBarItemsWithButtonsWidth:(NSArray *)widths
 {
     [self cleanData];
     CGFloat buttonX = ZERO_COORDINATE;
-    for (NSInteger index = 0; index < _selectedItemTitles.count; index++)
+    for (NSInteger index = 0; index < widths.count; index++)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(buttonX, ZERO_COORDINATE, [widths[index] floatValue], NAV_TAB_BAR_HEIGHT);
@@ -149,37 +157,23 @@
 {
     _currentIndex = currentIndex;
     UIButton *button = nil;
-//    if (_currentIndex < _items.count) {
-        button = _items[currentIndex];
-//    }else {
-//        button = [_items firstObject];
-//    }
-    
-    CGFloat flag = (currentIndex < [_selectedItemTitles count] - 2) ? (SCREEN_WIDTH - _leftImageWidth) : (SCREEN_WIDTH - ARROW_BUTTON_WIDTH);
-    
-    if (button.frame.origin.x + button.frame.size.width > flag)
-    {
-        CGFloat offsetX = button.frame.origin.x + button.frame.size.width - flag;
-        if (currentIndex < [_selectedItemTitles count] - 1)
-        {
-            offsetX = offsetX + 40.f;
-        }
-        
-        [_navigationTabBar setContentOffset:CGPointMake(offsetX, ZERO_COORDINATE) animated:YES];
+    //    if (_currentIndex < _items.count) {
+    button = _items[currentIndex];
+    CGFloat offsetX = button.zl_centerX - _navigationTabBarWidth * 0.5;
+    CGFloat offsetMax = _selectedTitlesWidth - _navigationTabBarWidth;
+    if (offsetX < 0 || offsetMax < 0) {
+        offsetX = 0;
+    } else if (offsetX > offsetMax){
+        offsetX = offsetMax;
     }
-    else
-    {
-        [_navigationTabBar setContentOffset:CGPointMake(ZERO_COORDINATE, ZERO_COORDINATE) animated:YES];
-    }
-    
-    
-//    if (_currentIndex < _items.count) {
-        [UIView animateWithDuration:.2f animations:^{
-            _line.frame = CGRectMake(button.frame.origin.x + 2.0f, _line.frame.origin.y, [_itemsWidth[currentIndex] floatValue] - 4.0f, _line.frame.size.height);
-        }];
-//    }
+    [_navigationTabBar setContentOffset:CGPointMake(offsetX, ZERO_COORDINATE) animated:YES];
+    [UIView animateWithDuration:.2f animations:^{
+        _line.frame = CGRectMake(button.frame.origin.x + 2.0f, _line.frame.origin.y, [_itemsWidth[currentIndex] floatValue] - 4.0f, _line.frame.size.height);
+    }];
+    //    }
     
 }
+
 
 - (void)setSelectedItemTitles:(NSArray *)selectedItemTitles
 {

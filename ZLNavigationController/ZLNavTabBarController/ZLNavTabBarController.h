@@ -12,13 +12,16 @@
 
 @interface ZLNavTabBarController : UIViewController
 
-@property (nonatomic, assign)   BOOL        scrollAnimation;            // 默认值: NO
-@property (nonatomic, assign)   BOOL        mainViewBounces;            // 默认值: NO
+@property (nonatomic, assign) BOOL scrollAnimation;
 
-@property (nonatomic, strong)   NSArray     *subViewControllers;        // 子控制器
+@property (nonatomic, assign) BOOL mainViewBounces;
 
-@property (nonatomic, strong)   UIColor     *navTabBarColor;            // 不能设置为[UIColor clearColor]
-@property (nonatomic, strong)   UIColor     *navTabBarLineColor;
+@property (nonatomic, assign) BOOL showArrayButton;
+
+@property (nonatomic, strong) NSArray *subViewControllers;        // 子控制器
+
+@property (nonatomic, strong) UIColor *navTabBarColor;            // 不能设置为[UIColor clearColor]
+@property (nonatomic, strong) UIColor *navTabBarLineColor;
 
 @property (nonatomic, assign) NSInteger unchangedToIndex;
 

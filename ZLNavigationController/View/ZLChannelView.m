@@ -28,6 +28,8 @@ typedef void(^Completion)(void);
 @property (nonatomic, strong) NSMutableArray *selectedArray;
 @property (nonatomic, strong) NSMutableArray *selectedIndexArray;
 @property (nonatomic, strong) NSMutableArray *selectedTotalArray;
+@property (nonatomic, assign) int unchangedToIndex;
+@property (nonatomic, strong) NSMutableArray *changedTitleArray;
 
 @end
 
@@ -38,6 +40,7 @@ typedef void(^Completion)(void);
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
+        _unchangedToIndex = [[NSUD objectForKey:UNCHANGED_TO_INDEX] intValue];
     }
     return self;
 }
@@ -47,20 +50,22 @@ typedef void(^Completion)(void);
 {
     CGFloat buttonW = (SCREEN_WIDTH - (MAXCOL + 1) * MARGIN) / (CGFloat)MAXCOL;
     CGFloat buttonH = buttonW * 0.6;
-    for (int index = 0; index < [titleNames count]; index++)
+    for (int index = 0; index < titleNames.count; index++)
     {
         int row = index / MAXCOL;
-        int col = (int)index % MAXCOL;
+        int col = index % MAXCOL;
         CGFloat buttonX = MARGIN + (MARGIN + buttonW) * col;
         CGFloat buttonY = MARGIN + (MARGIN + buttonH) * row;
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(buttonX, buttonY, buttonW, buttonH);
-        [button setTitle:_titleNames[index] forState:UIControlStateNormal];
+        [button setTitle:titleNames[index] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(itemPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addLongPressGestureRecognizerInView:button];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         button.backgroundColor = UNSELECTED_BUTTON_COLOR;
-        if (index < self.selectedToIndex) [self itemPressed:button];
+        if (index < self.selectedToIndex - _unchangedToIndex) {
+            [self itemPressed:button];
+        }
         [NSUD setObject:[NSNumber numberWithInteger:self.selectedToIndex] forKey:SELECTED_TO_INDEX];
         [self addSubview:button];
         [self fitButtonFont:button];
@@ -70,6 +75,8 @@ typedef void(^Completion)(void);
         [self.totalArray addObject:button];
         
     }
+    [NSUD setObject:@(NO) forKey:IS_UNCHANGED_TO_INDEX_CHANGED];
+    [NSUD synchronize];
 }
 
 - (void)updateSubViewsWithTotalArray:(NSArray *)totalArray
@@ -149,6 +156,7 @@ typedef void(^Completion)(void);
             button.backgroundColor = button.selected ? SELECTED_BUTTON_COLOR : UNSELECTED_BUTTON_COLOR;
         }completion:^(BOOL finished) {
             [self.selectedArray removeAllObjects];
+            [self addUnchangedTitleNamesToArray:self.selectedArray];
             for (UIButton *btn in self.totalArray) {
                 if (btn.selected) {
                     [self.selectedArray addObject:btn.titleLabel.text];
@@ -203,6 +211,7 @@ typedef void(^Completion)(void);
         }completion:^(BOOL finished) {
             [self.selectedArray removeAllObjects];
             [self.selectedTotalArray removeAllObjects];
+            [self addUnchangedTitleNamesToArray:self.selectedArray];
             for (UIButton *selectedBtn in self.totalArray) {
                 if (selectedBtn.selected) {
                     [self.selectedArray addObject:selectedBtn.titleLabel.text];
@@ -216,6 +225,7 @@ typedef void(^Completion)(void);
             [self sendNotificationOfSelectedChannelChanged:self.selectedArray];
             [NSUD setObject:self.selectedArray forKey:SELECTED_CHANNEL_NAMES];
             ZLChannelViewModel *channelViewModel = [[ZLChannelViewModel alloc] initWithTotalArray:self.selectedTotalArray];
+            
             [NSKeyedArchiver archiveRootObject:channelViewModel toFile:CHANNEL_FILE_PATH];
             
         }];
@@ -237,7 +247,7 @@ typedef void(^Completion)(void);
 - (NSMutableArray *)totalArray
 {
     if (_totalArray == nil) {
-        _totalArray = [NSMutableArray arrayWithCapacity:self.titleNames.count];
+        _totalArray = [NSMutableArray arrayWithCapacity:_titleNames.count];
     }
     return _totalArray;
 }
@@ -266,6 +276,14 @@ typedef void(^Completion)(void);
     return _selectedTotalArray;
 }
 
+- (NSMutableArray *)changedTitleArray
+{
+    if (_changedTitleArray == nil) {
+        _changedTitleArray = [@[] mutableCopy];
+    }
+    return _changedTitleArray;
+}
+
 - (void)fitButtonFont:(UIButton *)button
 {
     NSString *str = button.titleLabel.text;
@@ -290,14 +308,30 @@ typedef void(^Completion)(void);
     button.titleLabel.font = [UIFont systemFontOfSize:currentFont];
 }
 
+- (void)addUnchangedTitleNamesToArray:(NSMutableArray *)array
+{
+    for (int index = 0; index < _unchangedToIndex; index++) {
+        [array addObject:_titleNames[index]];
+    }
+}
+
+- (void)setupNewTitleNameArray:(NSArray *)titleNames
+{
+    for (int index = _unchangedToIndex; index < titleNames.count; index++) {
+        [self.changedTitleArray addObject:titleNames[index]];
+    }
+}
+
 #pragma mark - Public Methods
 #pragma marl -
 - (void)setTitleNames:(NSArray *)titleNames
 {
     ZLChannelViewModel *channelView = [NSKeyedUnarchiver unarchiveObjectWithFile:CHANNEL_FILE_PATH];
     _titleNames = titleNames;
-    if (![_titleNames compareWithOtherArray:[NSUD objectForKey:TOTAL_TITLE_NAMES]] || channelView.totalArray == nil || [[NSUD objectForKey:SELECTED_TO_INDEX] integerValue] != self.selectedToIndex) {
-        [self updateSubViewsWithtitleNames:_titleNames];
+    BOOL isUnchangedValueChanged = [[NSUD objectForKey:IS_UNCHANGED_TO_INDEX_CHANGED] boolValue];;
+    [self setupNewTitleNameArray:_titleNames];
+    if (![_titleNames compareWithOtherArray:[NSUD objectForKey:TOTAL_TITLE_NAMES]] || isUnchangedValueChanged || channelView.totalArray == nil || [[NSUD objectForKey:SELECTED_TO_INDEX] integerValue] != self.selectedToIndex) {
+        [self updateSubViewsWithtitleNames:self.changedTitleArray];
         [NSUD setObject:_titleNames forKey:TOTAL_TITLE_NAMES];
     } else {
         [self updateSubViewsWithTotalArray:channelView.totalArray];
