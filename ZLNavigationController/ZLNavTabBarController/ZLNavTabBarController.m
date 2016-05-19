@@ -67,7 +67,8 @@ static void *RecordLastClickKey = @"RecordLastClickKey";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
+    
     [self viewConfig];
     [self initConfig];
     [NS_NOTIFICATION_CENTER addObserver:self selector:@selector(selectedChannelChangedNotification:) name:SelectedChannelChangedNotification object:nil];
@@ -90,8 +91,6 @@ static void *RecordLastClickKey = @"RecordLastClickKey";
             _navTabBar.currentIndex = 0;
         }
     }
-    
-    
 }
 
 - (void)dealloc
@@ -102,13 +101,13 @@ static void *RecordLastClickKey = @"RecordLastClickKey";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBarHidden = NO;
+//    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)viewConfig
@@ -120,25 +119,28 @@ static void *RecordLastClickKey = @"RecordLastClickKey";
 - (void)viewInit
 {
     _navTabBarColor = _navTabBarColor ? _navTabBarColor : NavTabbarColor;
-    UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, ZERO_COORDINATE, SCREEN_WIDTH, STATUS_BAR_HEIGHT)];
-    statusView.backgroundColor = NavTabbarColor;
-    [self.view addSubview:statusView];
-    
-    _navTabBar = [[ZLNavTabBar alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, STATUS_BAR_HEIGHT, SCREEN_WIDTH, NAV_TAB_BAR_HEIGHT) showArrayButton:self.showArrayButton];
-    
+    self.edgesForExtendedLayout = NO;
+    if (self.navigationController.isNavigationBarHidden) {
+        UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, ZERO_COORDINATE, SCREEN_WIDTH, STATUS_BAR_HEIGHT)];
+        statusView.backgroundColor = _navTabBarColor;
+        [self.view addSubview:statusView];
+        _navTabBar = [[ZLNavTabBar alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, STATUS_BAR_HEIGHT, SCREEN_WIDTH, NAV_TAB_BAR_HEIGHT) showArrayButton:self.showArrayButton];
+    } else {
+        _navTabBar = [[ZLNavTabBar alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, ZERO_COORDINATE, SCREEN_WIDTH, NAV_TAB_BAR_HEIGHT) showArrayButton:self.showArrayButton];
+    }
     _navTabBar.selectedToIndex = _selectedToIndex;
-    
+    _navTabBar.titleColor = _titleColor;
     _navTabBar.delegate = self;
     _navTabBar.backgroundColor = _navTabBarColor;
     _navTabBar.lineColor = _navTabBarLineColor;
+    [self.view addSubview:_navTabBar];
     
-    _mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, _navTabBar.frame.origin.y + _navTabBar.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - _navTabBar.frame.origin.y - _navTabBar.frame.size.height)];
+    _mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, CGRectGetMaxY(_navTabBar.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetMaxY(_navTabBar.frame))];
     _mainView.delegate = self;
     _mainView.pagingEnabled = YES;
     _mainView.bounces = _mainViewBounces;
     _mainView.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:_mainView];
-    [self.view addSubview:_navTabBar];
 }
 
 - (void)initConfig

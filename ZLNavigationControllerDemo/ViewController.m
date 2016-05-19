@@ -59,6 +59,7 @@
     
     ZLNavTabBarController *navTabBarController = [[ZLNavTabBarController alloc] init];
     navTabBarController.subViewControllers = @[oneViewController, twoViewController, threeViewController, fourViewController, fiveViewController, sixViewController, sevenViewController, eightViewController, ninghtViewController];
+    navTabBarController.navTabBarColor = [UIColor whiteColor];
     navTabBarController.mainViewBounces = YES;
     navTabBarController.selectedToIndex = 5;
     navTabBarController.unchangedToIndex = 2;
