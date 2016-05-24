@@ -93,6 +93,7 @@ static void *RecordLastClickKey = @"RecordLastClickKey";
     }
 }
 
+
 - (void)dealloc
 {
     [NS_NOTIFICATION_CENTER removeObserver:self];
@@ -120,12 +121,28 @@ static void *RecordLastClickKey = @"RecordLastClickKey";
 {
     _navTabBarColor = _navTabBarColor ? _navTabBarColor : NavTabbarColor;
     self.edgesForExtendedLayout = NO;
+    NSLog(@"%@", self.navigationController);
+    if (self.navigationController) {
+        if (self.navigationController.isNavigationBarHidden) {
+            UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, ZERO_COORDINATE, SCREEN_WIDTH, STATUS_BAR_HEIGHT)];
+            statusView.backgroundColor = _navTabBarColor;
+            [self.view addSubview:statusView];
+            _navTabBar = [[ZLNavTabBar alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, STATUS_BAR_HEIGHT, SCREEN_WIDTH, NAV_TAB_BAR_HEIGHT) showArrayButton:self.showArrayButton];
+        } else {
+            _navTabBar = [[ZLNavTabBar alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, ZERO_COORDINATE, SCREEN_WIDTH, NAV_TAB_BAR_HEIGHT) showArrayButton:self.showArrayButton];
+        }
+    } else {
+        UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, ZERO_COORDINATE, SCREEN_WIDTH, STATUS_BAR_HEIGHT)];
+        statusView.backgroundColor = _navTabBarColor;
+        [self.view addSubview:statusView];
+        _navTabBar = [[ZLNavTabBar alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, STATUS_BAR_HEIGHT, SCREEN_WIDTH, NAV_TAB_BAR_HEIGHT) showArrayButton:self.showArrayButton];
+    }
     if (self.navigationController.isNavigationBarHidden) {
         UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, ZERO_COORDINATE, SCREEN_WIDTH, STATUS_BAR_HEIGHT)];
         statusView.backgroundColor = _navTabBarColor;
         [self.view addSubview:statusView];
         _navTabBar = [[ZLNavTabBar alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, STATUS_BAR_HEIGHT, SCREEN_WIDTH, NAV_TAB_BAR_HEIGHT) showArrayButton:self.showArrayButton];
-    } else {
+    } else if (self.navigationController){
         _navTabBar = [[ZLNavTabBar alloc] initWithFrame:CGRectMake(ZERO_COORDINATE, ZERO_COORDINATE, SCREEN_WIDTH, NAV_TAB_BAR_HEIGHT) showArrayButton:self.showArrayButton];
     }
     _navTabBar.selectedToIndex = _selectedToIndex;

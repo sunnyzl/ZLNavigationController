@@ -20,7 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.view.backgroundColor = [UIColor cyanColor];
+//     Do any additional setup after loading the view, typically from a nib.
     UIViewController *oneViewController = [[UIViewController alloc] init];
     oneViewController.title = @"新闻";
     oneViewController.view.backgroundColor = [UIColor brownColor];
@@ -59,15 +60,19 @@
     
     ZLNavTabBarController *navTabBarController = [[ZLNavTabBarController alloc] init];
     navTabBarController.subViewControllers = @[oneViewController, twoViewController, threeViewController, fourViewController, fiveViewController, sixViewController, sevenViewController, eightViewController, ninghtViewController];
-    navTabBarController.navTabBarColor = [UIColor whiteColor];
+    navTabBarController.navTabBarColor = [UIColor clearColor];
     navTabBarController.mainViewBounces = YES;
     navTabBarController.selectedToIndex = 5;
     navTabBarController.unchangedToIndex = 2;
-    navTabBarController.showArrayButton = YES;
+    navTabBarController.showArrayButton = NO;
     [navTabBarController addParentController:self];
-    
-    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
+
+//- (UIStatusBarStyle)preferredStatusBarStyle
+//{
+//    return UIStatusBarStyleLightContent;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

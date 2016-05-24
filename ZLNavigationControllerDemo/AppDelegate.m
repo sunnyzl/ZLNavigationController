@@ -19,8 +19,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
+//    [application setStatusBarStyle:UIStatusBarStyleLightContent];
+//    application.statusBarStyle = UIStatusBarStyleLightContent;
     self.window.rootViewController = nav;
     return YES;
+}
+
+- (double)testOne:(double)one two:(double)two {
+    return one + two;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
